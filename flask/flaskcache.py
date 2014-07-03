@@ -18,6 +18,20 @@ class cached(object):
             return response
         return decorator
 
+@app.before_request
+def return_cached():
+    # if GET and POST not empty
+    if not request.values:
+        response = cache.get(request.path)
+        if response: 
+            return response
+
+@app.after_request
+def cache_response(response):
+    if not request.values:
+        cache.set(request.path, response, CACHE_TIMEOUT)
+    return response
+
 @app.route("/")
 @cached()
 def index():
