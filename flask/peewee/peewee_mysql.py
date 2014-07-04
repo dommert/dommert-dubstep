@@ -1,3 +1,6 @@
+# Dommert Enterprises
+# MySQL Connection
+
 mysql_db = MySQLDatabase('my_database', user='code')
 
 
