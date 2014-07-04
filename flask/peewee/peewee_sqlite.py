@@ -1,4 +1,14 @@
 # Dommert Enterprises
+# Flask-PeeWee SQLite
+from flask import Flask
+from peewee import *
+
+# flask-peewee bindings
+from flask_peewee.db import Database
+
+app = Flask(__name__)
+app.config.from_object(__name__)
+
 sqlite_db = SqliteDatabase('sq.db')
 
 
