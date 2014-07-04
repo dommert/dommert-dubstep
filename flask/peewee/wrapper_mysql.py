@@ -17,3 +17,7 @@ app.config.from_object(__name__) # load database configuration from this module
 
 # instantiate the db wrapper
 db = Database(app)
+
+# start creating models
+class Blog(db.Model):
+    name = CharField()
