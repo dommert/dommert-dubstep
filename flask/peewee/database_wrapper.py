@@ -41,4 +41,5 @@ db = Database(app)
 # start creating models
 class Blog(db.Model):
     name = CharField()
-    # .. etc
+    #... etc 
+    
