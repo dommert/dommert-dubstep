@@ -6,3 +6,6 @@ class APIKey(db.Model):
 
 # instantiating the auth
 api_key_auth = APIKeyAuthentication(model=APIKey)
+
+
+api = RestAPI(app, prefix='/api/v1/')
