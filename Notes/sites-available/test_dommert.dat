@@ -1,0 +1,12 @@
+<VirtualHost *>
+DocumentRoot /home/dommertnet/www/test
+ServerName test.dommert.net
+ServerAlias test1.dommert.net
+<Directory /home/dommertnet/www/test>
+#Options FollowSymLinks
+Require all granted
+AllowOverride All
+Order deny,allow
+Allow from all
+</Directory>
+</VirtualHost>
