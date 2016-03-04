@@ -1,0 +1,99 @@
+# CRUD
+
+# CREATE 
+
+# INSERT
+
+new_artist = Artist.create(name="Newsboys")
+album_one = Album(artist=new_artist,
+                  title="Read All About It",
+                  release_date=datetime.date(1988,12,01),
+                  publisher="Refuge",
+                  media_type="CD")
+album_one.save()
+ 
+albums = [{"artist": new_artist,
+           "title": "Hell is for Wimps",
+           "release_date": datetime.date(1990,07,31),
+           "publisher": "Sparrow",
+           "media_type": "CD"
+           },
+          {"artist": new_artist,
+           "title": "Love Liberty Disco", 
+           "release_date": datetime.date(1999,11,16),
+           "publisher": "Sparrow",
+           "media_type": "CD"
+          },
+          {"artist": new_artist,
+           "title": "Thrive",
+           "release_date": datetime.date(2002,03,26),
+           "publisher": "Sparrow",
+           "media_type": "CD"}
+          ]
+ 
+for album in albums:
+    a = Album(**album)
+    a.save()
+ 
+bands = ["MXPX", "Kutless", "Thousand Foot Krutch"]
+for band in bands:
+    artist = Artist.create(name=band)
+    artist.save()
+
+
+
+
+#Example of inserting multiple Users:
+
+usernames = ['charlie', 'huey', 'peewee', 'mickey']
+row_dicts = ({'username': username} for username in usernames)
+
+# Insert 4 new rows.
+User.insert_many(row_dicts).execute()
+
+#Because the rows parameter can be an arbitrary iterable, you can also use a generator:
+
+def get_usernames():
+    for username in ['charlie', 'huey', 'peewee']:
+        yield {'username': username}
+User.insert_many(get_usernames()).execute()
+
+# MODIFY
+
+
+band = Artist.select().where(Artist.name=="Kutless").get()
+print band.name
+ 
+# shortcut method
+band = Artist.get(Artist.name=="Kutless")
+print band.name
+ 
+# change band name
+band.name = "Beach Boys"
+band.save()
+ 
+album = Album.select().join(Artist).where(
+    (Album.title=="Thrive") & (Artist.name == "Newsboys")
+    ).get()
+album.title = "Step Up to the Microphone"
+album.save()
+
+
+# READ
+
+# LIST
+
+
+
+# REMOVE
+band = Artist.get(Artist.name=="MXPX")
+band.delete_instance()
+
+# GET AND CREATE
+created = Person.get_or_create(
+    first_name=first_name,
+    last_name=last_name,
+    defaults={'dob': dob, 'favorite_color': 'green'})
+    
+    
+
